@@ -66,6 +66,9 @@ If you prefer to run the container in the background, do `docker compose -up -d`
 
 - [ ] Support newer Android SDK's
 - [ ] Support different GStreamer versions
+- [ ] How create cerbero recipe
+- [ ] Add faac to cerbero recipe
+- [ ] Add readme for this
 
 ## Release
 
