@@ -1,7 +1,7 @@
 # -*- Mode: Python -*- vi:si:et:sw=4:sts=4:ts=4:syntax=python
 from cerbero.tools.libtool import LibtoolLibrary
 
-class FAACRecipe(recipe.Recipe):
+class Recipe(custom.GStreamer):
     name = 'faac'
     version = '1.30'
     stype = SourceType.TARBALL
