@@ -1,5 +1,6 @@
 # FROM carlonluca/qt-dev:5.15.8-lts-lgpl
-FROM oven/bun:latest
+# FROM oven/bun:latest
+FROM python:3.10.5-slim-buster
 
 WORKDIR /usr/src
 
@@ -42,10 +43,15 @@ RUN apt update && \
     libjson-glib-1.0-0 \
     libjson-glib-dev \
     ninja-build \
-    libxml2-dev libglib2.0-dev libjson-glib-dev 
+    libxml2-dev libglib2.0-dev libjson-glib-dev
+    # \
+    # && rm -rf /var/lib/apt/lists/* 
+    
+# RUN python3 -m venv /opt/venv
+# # Enable venv
+# ENV PATH="/opt/venv/bin:$PATH"    
 
-RUN pip3 install meson==0.62.2 hotdoc==0.13.7 ninja tomli
-
+RUN pip3 install meson==0.62.2 hotdoc==0.13.7 ninja tomli distro
 # ENV QT_ANDROID_ROOT=/opt/Qt-android-5.15.8-lts-lgpl
 # ENV QT_ANDROID_ROOT_DIR=/opt/Qt-android-5.15.8-lts-lgpl
 # ENV QMAKE=/opt/Qt-android-5.15.8-lts-lgpl/bin/qmake
@@ -60,9 +66,11 @@ ENV OPENSSL_ROOT_DIR=/opt/android_openssl/ssl_1.1
 # COPY ./openh264-2.3.0.tar.gz /root/.cache/cerbero-sources/openh264-2.3.0/v2.3.0.tar.gz
 # COPY ./srt-1.4.3.tar.gz /root/.cache/cerbero-sources/srt-1.4.3/v1.4.3.tar.gz
 
-RUN git clone https://gitlab.freedesktop.org/gstreamer/cerbero.git /vendor/cerbero && \
-    cd /vendor/cerbero && git checkout 1.22.5 && \
-    ./cerbero-uninstalled -c config/cross-android-universal.cbc fetch-bootstrap && \
+RUN git clone --depth=1 https://gitlab.freedesktop.org/gstreamer/cerbero.git /vendor/cerbero && \
+    cd /vendor/cerbero && ./cerbero-uninstalled bootstrap && \
+    cp -r /vendor/cerbero/build/dist/android_arm64/gst-plugins-bad-1.0.recipe 
+    #  git checkout 1.22.5 && 
+RUN ./cerbero-uninstalled -c config/cross-android-universal.cbc fetch-bootstrap && \
     ./cerbero-uninstalled -c config/cross-android-universal.cbc fetch-package gstreamer-1.0
 RUN cd /vendor/cerbero && ./cerbero-uninstalled -c config/cross-android-arm64.cbc bootstrap --offline && \
     ./cerbero-uninstalled -c config/cross-android-arm64.cbc package gstreamer-1.0 --offline

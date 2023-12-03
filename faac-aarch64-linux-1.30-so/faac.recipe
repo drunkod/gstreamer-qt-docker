@@ -5,9 +5,9 @@ class Recipe(custom.GStreamer):
     name = 'faac'
     version = '1.30'
     stype = SourceType.TARBALL
-    url = 'http://some-url-to-faac-source/faac-1.30.tar.gz'
-    tarball_checksum = 'checksum-of-the-tarball'  # Replace with actual checksum
-    licenses = [{License.LGPL: ['COPYING']}]
+    url = 'https://github.com/knik0/faac/archive/refs/tags/1_30.tar.gz'
+    # tarball_checksum = 'checksum-of-the-tarball'  # Replace with actual checksum
+    licenses = [{License.LGPLv2_1Plus}]
     btype = BuildType.MESON  # Using Meson build system
     meson_options = {
         # Add Meson build options here if needed, such as:

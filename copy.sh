@@ -17,3 +17,13 @@ cd /vendor/cerbero/recipes
 
   docker system prune
   rm -rf /tmp/*
+
+  Check disk usage:
+    df -h - Show disk usage in human readable format for all mounted filesystems.
+
+    Check free space on a specific disk partition:
+    df -h /path/to/partition
+
+    Find which folders are taking up space:
+    du -sh /* - Summarize disk usage for folders from root.
+    du -hc $HOME - Show usage for folders in home directory.

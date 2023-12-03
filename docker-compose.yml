@@ -13,4 +13,3 @@ services:
       - QT_GRAPHICSSYSTEM=native
     volumes:
       - .:/usr/src
-      - /tmp/.X11-unix:/tmp/.X11-unix
