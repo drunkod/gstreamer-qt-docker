@@ -1,12 +1,13 @@
 cd /vendor/cerbero/recipes
+ cp -r /usr/src/faac-aarch64-linux-1.30-so/lib/faac/* /vendor/cerbero/build/sources/android_arm64/faac-1.30
+ cp -r /usr/src/faac-aarch64-linux-1.30-so/faac.recipe /vendor/cerbero/recipes
 
- cp -r /usr/src/faac-aarch64-linux-1.30-so/faac.recipe .
+ cp -r /usr/src/faac-aarch64-linux-1.30-so/gst-plugins-bad-1.0.recipe /vendor/cerbero/recipes
 
- cp -r /usr/src/faac-aarch64-linux-1.30-so/gst-plugins-bad-1.0.recipe .
+ cp -r /usr/src/faac-aarch64-linux-1.30-so/lib/faac/meson.build /vendor/cerbero/build/sources/android_arm64/gstreamer-1.0/subprojects/gst-plugins-bad/ext/faac
 
- cd /vendor/cerbero/build/dist/android_arm64
 
-  cp -r /usr/src/faac-aarch64-linux-1.30-so/* .
+  cp -r /usr/src/faac-aarch64-linux-1.30-so/* /vendor/cerbero/build/dist/android_arm64
 
 
   cd /vendor/cerbero && ./cerbero-uninstalled -c config/cross-android-arm64.cbc bootstrap

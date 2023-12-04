@@ -74,6 +74,7 @@ RUN cd /vendor/cerbero && ./cerbero-uninstalled -c config/cross-android-universa
 
 RUN cd /vendor/cerbero && ./cerbero-uninstalled -c config/cross-android-arm64.cbc bootstrap --offline && \
     ./cerbero-uninstalled -c config/cross-android-arm64.cbc package gstreamer-1.0 --offline
-    # cp -r /vendor/cerbero/build/dist/android_arm64/gst-plugins-bad-1.0.recipe /usr/src
+
+RUN cp -r /vendor/cerbero/recipes/gst-plugins-bad-1.0.recipe /usr/src
                             
 ENTRYPOINT [ "" ]

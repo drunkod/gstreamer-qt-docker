@@ -1,29 +1,11 @@
 # -*- Mode: Python -*- vi:si:et:sw=4:sts=4:ts=4:syntax=python
-from cerbero.tools.libtool import LibtoolLibrary
 
-class Recipe(custom.GStreamer):
+class Recipe(recipe.Recipe):
     name = 'faac'
     version = '1.30'
-    stype = SourceType.TARBALL
-    url = 'https://github.com/knik0/faac/archive/refs/tags/1_30.tar.gz'
-    # tarball_checksum = 'checksum-of-the-tarball'  # Replace with actual checksum
-    licenses = [{License.LGPLv2_1Plus}]
+    licenses = [License.LGPLv2_1Plus]
+    remotes = {'main': 'https://github.com/GStreamer/gstreamer/tree/main/subprojects/gst-plugins-bad/ext/faac'}
     btype = BuildType.MESON  # Using Meson build system
-    meson_options = {
-        # Add Meson build options here if needed, such as:
-        # 'default_library': 'shared',
-    }
 
     files_libs = ['libfaac']
-    files_devel = ['include/faac.h', '%(libdir)s/pkgconfig/faac.pc']
-
-    # List of patches to apply (if any)
-    patches = []
-
-    def post_install(self):
-        # Meson does not generate la files, so create one if needed
-        LibtoolLibrary('libfaac', self.version, True, False, self.config.libdir, self.config.target_platform).save()
-        # Call the base class post_install method
-        super(FAACRecipe, self).post_install()
-
-# Replace 'recipe.Recipe' with the actual base recipe class you are using
+    files_devel = ['include/faac.h', 'include/faaccfg.h']
