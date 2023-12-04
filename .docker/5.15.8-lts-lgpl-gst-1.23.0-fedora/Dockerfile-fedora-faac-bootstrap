@@ -1,0 +1,62 @@
+FROM registry.fedoraproject.org/fedora:38
+
+ENV TERM="dumb"
+
+ARG DEFAULT_BRANCH="faac"
+
+# System setup
+RUN echo "fastestmirror=true" >>  /etc/dnf/dnf.conf && \
+    dnf upgrade -y && \
+    dnf install -y sudo git lbzip2 which
+
+RUN dnf update -y \
+    && dnf install -y \
+    --setopt=tsflags=nodocs \
+    --setopt=deltarpm=false \
+    findutils \
+    python3-distro \
+    python3-pip \
+    /usr/bin/virtualenv \
+    gcc \
+    gcc-c++ \
+    git-core \
+    make \
+    && dnf clean all
+# Configure git for various usage
+# RUN git config --global user.email "cerbero@gstreamer.freedesktop.org" && \
+#     git config --global user.name  "Cerbero Build System"
+# Step 3: Check and install perl-FindBin, updating repositories first
+# RUN dnf makecache --refresh && \
+#     dnf module list perl:* && \
+#     dnf module enable -y perl:latest && \
+#     dnf install -y perl-FindBin || \
+#     dnf provides *FindBin*  # This will help identify if the package or its files are provided under a different name
+
+RUN git clone -b ${DEFAULT_BRANCH} https://github.com/drunkod/cerbero.git && \
+    mkdir $HOME/.cerbero && \
+    echo "allow_parallel_build=True" > $HOME/.cerbero/cerbero.cbc && \
+    echo "use_ccache=True" >> $HOME/.cerbero/cerbero.cbc && \
+    cd cerbero && \
+      echo "local_sources=\"/cerbero/cerbero-sources\"" >> /usr/src/localconf.cbc && \
+      echo "home_dir=\"/cerbero/cerbero-build\"" >> /usr/src/localconf.cbc && \
+      echo "# Set custom remote and branch for all gstreamer recipes" >> /usr/src/localconf.cbc && \ 
+      echo "recipes_remotes = {'gstreamer-1.0': {'custom-remote': 'https://github.com/drunkod/gstreamer.git'}}" >> /usr/src/localconf.cbc && \
+      echo "recipes_commits = {'gstreamer-1.0': 'custom-remote/faac'}" >> /usr/src/localconf.cbc && \  
+    #   ./cerbero-uninstalled -t -c localconf.cbc fetch-bootstrap --jobs=4 && \
+    #   ./cerbero-uninstalled -t -c localconf.cbc fetch-package --jobs=4 gstreamer-1.0 && \
+      ./cerbero-uninstalled -t -c /usr/src/localconf.cbc bootstrap -y --build-tools=no --toolchains=no
+    #   ./cerbero-uninstalled -t -c localconf.cbc -c config/cross-win32.cbc fetch-bootstrap --jobs=4 && \
+    #   ./cerbero-uninstalled -t -c localconf.cbc -c config/cross-win32.cbc fetch-package --jobs=4 gstreamer-1.0 && \
+    #   ./cerbero-uninstalled -t -c localconf.cbc -c config/cross-win64.cbc fetch-bootstrap --jobs=4 && \
+    #   ./cerbero-uninstalled -t -c localconf.cbc -c config/cross-win64.cbc fetch-package --jobs=4 gstreamer-1.0 && \
+    #   ./cerbero-uninstalled -t -c localconf.cbc -c config/cross-android-universal.cbc fetch-bootstrap --jobs=4 && \
+    #   ./cerbero-uninstalled -t -c localconf.cbc -c config/cross-android-universal.cbc fetch-package --jobs=4 gstreamer-1.0 && \
+RUN cd cerbero && ./cerbero-uninstalled -t -c /usr/src/localconf.cbc -c config/cross-android-arm64.cbc bootstrap
+
+# RUN cd cerbero && ./cerbero-uninstalled -t -c localconf.cbc -c config/cross-android-arm64.cbc package gstreamer-1.0 && \
+#       cd .. && \
+#     rm -rf /cerbero/cerbero-build/{dist,logs,sources} && \
+#     rm -f /cerbero/cerbero-build/{linux,windows,android}*.cache && \
+#     dnf clean all
+    
+ENTRYPOINT [ "" ]
