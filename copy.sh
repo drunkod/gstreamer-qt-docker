@@ -6,6 +6,7 @@ cd /vendor/cerbero/recipes
 
  cp -r /usr/src/faac-aarch64-linux-1.30-so/lib/faac/meson.build /vendor/cerbero/build/sources/android_arm64/gstreamer-1.0/subprojects/gst-plugins-bad/ext/faac
 
+cat /cerbero/cerbero-build/sources/android_arm64/gstreamer-1.0/subprojects/gst-plugins-bad/ext/faac/meson.build
 
   cp -r /usr/src/faac-aarch64-linux-1.30-so/* /vendor/cerbero/build/dist/android_arm64
 
@@ -14,6 +15,8 @@ cd /vendor/cerbero/recipes
 
   ./cerbero-uninstalled -c config/cross-android-arm64.cbc package gstreamer-1.0
 
+
+ ./cerbero-uninstalled -c config/cross-android-arm64.cbc buildone gst-plugins-bad-1.0
 
 
   docker system prune

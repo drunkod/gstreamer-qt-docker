@@ -27,8 +27,8 @@ If you encounter build issues, you can clean the recipe and try to rebuild it:
 
 Here's an example of what the gst-plugins-bad-1.0.recipe might look like with the FAAC dependency added:
 
-'
-from cerbero.enums import License, SourceType, BuildType
+
+``from cerbero.enums import License, SourceType, BuildType
 import custom
 
 class Recipe(custom.GStreamer):
@@ -53,5 +53,19 @@ class Recipe(custom.GStreamer):
         # ... other options ...
     }
 
-    # ... rest of the recipe ...
-    '
+    # ... rest of the recipe ...``
+    
+
+    https://github.com/dragonCodecs/libAudio/commit/fb13667d004df4683a929ea55a2734b059a66af4
+
+    maybe add how wrap file
+
+    ``    
+    [wrap-git]
+    url = https://github.com/dragonCodecs/faac.git
+    revision = head
+    clone-recursive = false
+
+    [provide]
+    faac = faac_dep
+    ``
