@@ -66,15 +66,15 @@ ENV OPENSSL_ROOT_DIR=/opt/android_openssl/ssl_1.1
 # COPY ./openh264-2.3.0.tar.gz /root/.cache/cerbero-sources/openh264-2.3.0/v2.3.0.tar.gz
 # COPY ./srt-1.4.3.tar.gz /root/.cache/cerbero-sources/srt-1.4.3/v1.4.3.tar.gz
 
-RUN git clone --depth=1 https://gitlab.freedesktop.org/gstreamer/cerbero.git /vendor/cerbero && \
-    cd /vendor/cerbero && ./cerbero-uninstalled bootstrap
+RUN git clone https://gitlab.freedesktop.org/gstreamer/cerbero.git /vendor/cerbero && \
+    cd /vendor/cerbero && git checkout 1.22.7
     #  git checkout 1.22.5 && 
-RUN cd /vendor/cerbero && ./cerbero-uninstalled -c config/cross-android-universal.cbc fetch-bootstrap && \
-    ./cerbero-uninstalled -c config/cross-android-universal.cbc fetch-package gstreamer-1.0
+# RUN cd /vendor/cerbero && ./cerbero-uninstalled -c config/cross-android-universal.cbc fetch-bootstrap && \
+#     ./cerbero-uninstalled -c config/cross-android-universal.cbc fetch-package gstreamer-1.0
 
-RUN cd /vendor/cerbero && ./cerbero-uninstalled -c config/cross-android-arm64.cbc bootstrap --offline && \
-    ./cerbero-uninstalled -c config/cross-android-arm64.cbc package gstreamer-1.0 --offline
+RUN cd /vendor/cerbero && ./cerbero-uninstalled -v rust,unwind -c config/cross-android-arm64.cbc bootstrap
 
-RUN cp -r /vendor/cerbero/recipes/gst-plugins-bad-1.0.recipe /usr/src
+# RUN cd /vendor/cerbero && ./cerbero-uninstalled -c config/cross-android-arm64.cbc package gstreamer-1.0
+    # cp -r /vendor/cerbero/build/dist/android_arm64/gst-plugins-bad-1.0.recipe /usr/src
                             
 ENTRYPOINT [ "" ]
