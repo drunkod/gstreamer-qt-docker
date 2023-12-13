@@ -5,7 +5,7 @@ with import <nixpkgs> {
 };
 
 mkShell {
-  buildInputs = [ faac ]; # your dependencies here
+  buildInputs = [ libunwind ]; # your dependencies here
 }
 
 #export PKG_CONFIG_PATH=/libfaac-android/jni/include:$PKG_CONFIG_PATH

@@ -1,0 +1,15 @@
+version: '3.6'
+
+services:
+  builder:
+    container_name: qt-gst-builder-rust-22-7
+    build:
+      context: ./.docker/5.15.8-lts-lgpl-gst-1.23.0-fedora
+      dockerfile: Dockerfile-fedora-faac-bootstrap-rust-22-7
+    #   network: host
+    # network_mode: host
+    command: tail -f /dev/null
+    environment:
+      - QT_GRAPHICSSYSTEM=native
+    volumes:
+      - .:/usr/src

@@ -31,3 +31,10 @@ cat /cerbero/cerbero-build/sources/android_arm64/gstreamer-1.0/subprojects/gst-p
     Find which folders are taking up space:
     du -sh /* - Summarize disk usage for folders from root.
     du -hc $HOME - Show usage for folders in home directory.
+
+
+sudo find / -name *fallbackswitch* 
+
+sudo systemctl start docker
+
+cp -r gcfhvdbcwp4s70wqgs4fdfb744lgl43i-libunwind-1.6.2/* /cerbero/cerbero-build/dist/android_arm64
