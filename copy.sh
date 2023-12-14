@@ -18,7 +18,7 @@ cat /cerbero/cerbero-build/sources/android_arm64/gstreamer-1.0/subprojects/gst-p
 
  ./cerbero-uninstalled -c config/cross-android-arm64.cbc buildone gst-plugins-bad-1.0
 
-
+  sudo systemctl start docker
   docker system prune
   rm -rf /tmp/*
 
