@@ -69,6 +69,8 @@ If you prefer to run the container in the background, do `docker compose -up -d`
 - [ ] How create cerbero recipe
 - [ ] Add faac to cerbero recipe
 - [ ] Add readme for this
+- [+] delete 'raptorq', Update gst-plugins-rs.recipehttps://github.com/drunkod/cerbero/commit/73c6721c9979cd78f216213e3bdb8716b062d297s
+ld
 
 ## Release
 
