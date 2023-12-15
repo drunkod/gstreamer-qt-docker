@@ -38,3 +38,7 @@ sudo find / -name *fallbackswitch*
 sudo systemctl start docker
 
 cp -r gcfhvdbcwp4s70wqgs4fdfb744lgl43i-libunwind-1.6.2/* /cerbero/cerbero-build/dist/android_arm64
+
+cat cerbero/recipes/libunwind.recipe
+
+cd cerbero && ./cerbero-uninstalled -v rust,unwind  -t -c /usr/src/localconf.cbc -c config/cross-android-arm64.cbc build libunwind
