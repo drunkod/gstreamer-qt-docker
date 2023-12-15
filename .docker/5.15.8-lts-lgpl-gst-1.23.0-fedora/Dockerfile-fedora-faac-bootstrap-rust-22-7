@@ -37,21 +37,16 @@ RUN git clone -b ${DEFAULT_BRANCH} https://github.com/drunkod/cerbero.git && \
     echo "allow_parallel_build=True" > $HOME/.cerbero/cerbero.cbc && \
     echo "use_ccache=True" >> $HOME/.cerbero/cerbero.cbc && \
     echo " " > $HOME/.cerbero/cerbero.cbc && \
-    cd cerbero && \
+    cd cerbero && git checkout 1.22.7 && \
       echo "local_sources=\"/cerbero/cerbero-sources\"" >> /usr/src/localconf.cbc && \
       echo "home_dir=\"/cerbero/cerbero-build\"" >> /usr/src/localconf.cbc && \
       echo "# Set custom remote and branch for all gstreamer recipes" >> /usr/src/localconf.cbc && \ 
       echo "recipes_remotes = {'gstreamer-1.0': {'custom-remote': 'https://github.com/drunkod/gstreamer.git'}}" >> /usr/src/localconf.cbc && \
-      echo "recipes_commits = {'gstreamer-1.0': 'custom-remote/1.22'}" >> /usr/src/localconf.cbc && \ 
+      echo "recipes_commits = {'gstreamer-1.0': 'custom-remote/1.22'}" >> /usr/src/localconf.cbc && \  
     #   ./cerbero-uninstalled -t -c localconf.cbc fetch-bootstrap --jobs=4 && \
     #   ./cerbero-uninstalled -t -c localconf.cbc fetch-package --jobs=4 gstreamer-1.0 && \
       ./cerbero-uninstalled -v rust -t -c /usr/src/localconf.cbc bootstrap -y --build-tools=no --toolchains=no
-    #   ./cerbero-uninstalled -t -c localconf.cbc -c config/cross-win32.cbc fetch-bootstrap --jobs=4 && \
-    #   ./cerbero-uninstalled -t -c localconf.cbc -c config/cross-win32.cbc fetch-package --jobs=4 gstreamer-1.0 && \
-    #   ./cerbero-uninstalled -t -c localconf.cbc -c config/cross-win64.cbc fetch-bootstrap --jobs=4 && \
-    #   ./cerbero-uninstalled -t -c localconf.cbc -c config/cross-win64.cbc fetch-package --jobs=4 gstreamer-1.0 && \
-    #   ./cerbero-uninstalled -t -c localconf.cbc -c config/cross-android-universal.cbc fetch-bootstrap --jobs=4 && \
-    #   ./cerbero-uninstalled -t -c localconf.cbc -c config/cross-android-universal.cbc fetch-package --jobs=4 gstreamer-1.0 && \
+
 RUN cd cerbero && ./cerbero-uninstalled -v rust -t -c /usr/src/localconf.cbc -c config/cross-android-arm64.cbc bootstrap
 
 # TODO nix-cross/howbuild.md && cp -r gcfhvdbcwp4s70wqgs4fdfb744lgl43i-libunwind-1.6.2/* /cerbero/cerbero-build/dist/android_arm64

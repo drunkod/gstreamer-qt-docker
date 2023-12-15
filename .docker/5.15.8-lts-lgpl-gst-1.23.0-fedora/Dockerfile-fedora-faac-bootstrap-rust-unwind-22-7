@@ -37,6 +37,7 @@ RUN git clone -b ${DEFAULT_BRANCH} https://github.com/drunkod/cerbero.git && \
     echo "allow_parallel_build=True" > $HOME/.cerbero/cerbero.cbc && \
     echo "use_ccache=True" >> $HOME/.cerbero/cerbero.cbc && \
     echo " " > $HOME/.cerbero/cerbero.cbc && \
+    echo " " > $HOME/.cerbero/cerbero.cbc && \
     cd cerbero && \
       echo "local_sources=\"/cerbero/cerbero-sources\"" >> /usr/src/localconf.cbc && \
       echo "home_dir=\"/cerbero/cerbero-build\"" >> /usr/src/localconf.cbc && \
