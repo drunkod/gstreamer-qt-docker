@@ -1,0 +1,17 @@
+version: '3.6'
+
+services:
+  builder:
+    container_name: buster-gst-main-rust-bootstrap-delete_rs_plugins
+    build:
+      context: ./.docker/buster-gst
+      dockerfile: Dockerfile-main
+      args:
+        DEFAULT_BRANCH: delete_rs_plugins  # Set the default branch here      
+    #   network: host
+    # network_mode: host
+    command: tail -f /dev/null
+    environment:
+      - QT_GRAPHICSSYSTEM=native
+    volumes:
+      - .:/usr/src
