@@ -1,0 +1,17 @@
+version: '3.6'
+
+services:
+  builder:
+    container_name: fedora-gst-main-rust-bootstrap
+    build:
+      context: ./.docker/fedora-gst-main
+      dockerfile: Dockerfile-rust-bootstrap-35
+      args:
+        DEFAULT_BRANCH: main  # Set the default branch here      
+    #   network: host
+    # network_mode: host
+    command: tail -f /dev/null
+    environment:
+      - QT_GRAPHICSSYSTEM=native
+    volumes:
+      - .:/usr/src
