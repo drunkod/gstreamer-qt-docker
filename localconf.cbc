@@ -1,5 +1,5 @@
 local_sources="/cerbero/cerbero-sources"
 home_dir="/cerbero/cerbero-build"
 # Set custom remote and branch for all gstreamer recipes
-recipes_remotes = {'gstreamer-1.0': {'custom-remote': 'https://github.com/drunkod/gstreamer.git'}}
-recipes_commits = {'gstreamer-1.0': 'custom-remote/1.22'}
+recipes_remotes = {'gstreamer-1.0': {'custom-remote': 'https://github.com/drunkody/gstreamer.git'}}
+recipes_commits = {'gstreamer-1.0': 'custom-remote/main'}
