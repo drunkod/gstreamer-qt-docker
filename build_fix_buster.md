@@ -71,4 +71,9 @@ AttributeError: module 'os' has no attribute 'copy'
 
 in /cerbero/recipes/gst-plugins-rs.recipe
 
-os.copy change to shutil.copy
+all strings with os.copy change to shutil.copy in file linux cmd
+
+
+```
+sed -i 's/os\.copy/shutil.copy/g' /cerbero/recipes/gst-plugins-rs.recipe
+```
