@@ -1,0 +1,17 @@
+version: '3.6'
+
+services:
+  builder:
+    container_name: buster-gst-22-rust-bootstrap
+    build:
+      context: ./.docker/buster-gst
+      dockerfile: Dockerfile-22
+      args:
+        DEFAULT_BRANCH: "1.22"  # Set the default branch here      
+    #   network: host
+    # network_mode: host
+    command: tail -f /dev/null
+    environment:
+      - QT_GRAPHICSSYSTEM=native
+    volumes:
+      - .:/usr/src
