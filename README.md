@@ -84,29 +84,30 @@ On Linux hosts without iptables:
 
 ```bash
 docker build --network=host -t qt-gst-builder .
+
 ```
 07/01/24 docker-compose-buster-gst-22.yml 1.22
 
 https://github.com/drunkody/cerbero/blob/1.22/packages/gstreamer-1.0/gstreamer-1.0.package
 
-    packages =[
+  packages =[
                # (name, required, selected)
                ('gstreamer-1.0-core', True, True),
                ('gstreamer-1.0-system', False, True),
                ('gstreamer-1.0-playback', False, True),
                ('gstreamer-1.0-codecs', False, True),
-               ('gstreamer-1.0-qt5', False, True),
-               ('gstreamer-1.0-qt6', False, True),
+               ('gstreamer-1.0-qt5', False, False),
+               ('gstreamer-1.0-qt6', False, False),
                ('gstreamer-1.0-effects', False, True),
                ('gstreamer-1.0-net', False, True),
-               ('gstreamer-1.0-visualizers', False, True),
-               ('gstreamer-1.0-codecs-gpl', False, False),
-               ('gstreamer-1.0-codecs-restricted', False, False),
-               ('gstreamer-1.0-net-restricted', False, False),
+               ('gstreamer-1.0-visualizers', False, False),
+               ('gstreamer-1.0-codecs-gpl', False, True),
+               ('gstreamer-1.0-codecs-restricted', False, True),
+               ('gstreamer-1.0-net-restricted', False, True),
                ('gstreamer-1.0-dvd', False, False),
                ('gstreamer-1.0-libav', False, False),
                ('gstreamer-1.0-encoding', False, False),
                ('gstreamer-1.0-capture', False, False),
                ('gstreamer-1.0-editing', False, False),
                ('gstreamer-1.0-devtools', False, False),
-              ]
+              ]             
