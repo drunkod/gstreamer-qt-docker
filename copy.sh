@@ -42,3 +42,11 @@ cp -r gcfhvdbcwp4s70wqgs4fdfb744lgl43i-libunwind-1.6.2/* /cerbero/cerbero-build/
 cat cerbero/recipes/libunwind.recipe
 
 cd cerbero && ./cerbero-uninstalled -v rust,unwind  -t -c /usr/src/localconf.cbc -c config/cross-android-arm64.cbc build libunwind
+
+mkdir ./arm64
+
+tar -xf gstreamer-1.0-android-arm64-1.22.8.tar.xz -C ./arm64  
+
+cd /usr/src/gstreamer-android
+
+./build_gst_so.sh
